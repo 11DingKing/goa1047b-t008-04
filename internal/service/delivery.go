@@ -205,7 +205,7 @@ func (s *DeliveryService) CheckAutoRelease(now time.Time) []string {
 				"slot auto-released: cargo not arrived 24h before cutoff for reservation "+r.ID)
 		}
 		released = append(released, r.ID)
-		s.PromoteWaitlist(r.WindowID, now)
+		s.promoteWaitlistLocked(r.WindowID, slot, now)
 	}
 	return released
 }
